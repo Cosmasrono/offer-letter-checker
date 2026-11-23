@@ -4,8 +4,10 @@ import { prisma } from "./prisma";
 import { canViewReport, type CurrentUser } from "./session";
 import { isReportExpired } from "./privacy-policy";
 
-/** An explicit local development override; ignored by builds and production servers. */
-export const freeReportTesting = () => process.env.NODE_ENV === "development" && process.env.FREE_REPORT_TESTING === "true";
+/** Free access: FREE_REPORT_TESTING is a local development override (ignored in production); FREE_CHECKS=true is the
+ * deliberate switch that makes every check free on the live site until payments are turned on. */
+export const freeReportTesting = () =>
+  process.env.FREE_CHECKS === "true" || (process.env.NODE_ENV === "development" && process.env.FREE_REPORT_TESTING === "true");
 
 /** Missing/invalid prices fall back to KES 50. Only the explicit development override enables free access. */
 export const reportPriceKes = () => {

@@ -180,6 +180,16 @@ test('free testing never bypasses production payment or activates without an exp
     assert.equal(await payment.canDownload(ID, '', null), false);
   }
 });
+test('FREE_CHECKS=true makes checks free in production; any other value keeps payment', async () => {
+  const free = loadPayments({ environment: { NODE_ENV: 'production', FREE_CHECKS: 'true', REPORT_PRICE_KES: '50' } });
+  assert.equal(free.reportPriceKes(), 0);
+  assert.equal(await free.canDownload(ID, '', null), true);
+  for (const FREE_CHECKS of ['', 'false', 'TRUE', '1']) {
+    const paid = loadPayments({ environment: { NODE_ENV: 'production', FREE_CHECKS, REPORT_PRICE_KES: '50' } });
+    assert.equal(paid.reportPriceKes(), 50);
+    assert.equal(await paid.canDownload(ID, '', null), false);
+  }
+});
 test('missing, zero and invalid prices cannot enable free access', t => {
   const before = process.env.REPORT_PRICE_KES;
   t.after(() => { if (before === undefined) delete process.env.REPORT_PRICE_KES; else process.env.REPORT_PRICE_KES = before; });

@@ -150,8 +150,8 @@ export function UploadForm({ priceKes }: Props) {
   return (
     <div className="upload-card">
       <div className="upload-heading">
-        <div><h2>Let&apos;s check your offer.</h2><p>{priceKes === 0 ? "Free testing. Read your findings after scanning." : "Scan first. Unlock the findings when you’re ready."}</p></div>
-        <div className="upload-price"><strong>{priceKes === 0 ? "Free testing" : `KES ${priceKes}`}</strong><span>{priceKes === 0 ? "report + PDF included" : "to unlock · PDF included"}</span></div>
+        <div><h2>Let&apos;s check your offer.</h2><p>{priceKes === 0 ? "Free. Read your findings after scanning." : "Scan first. Unlock the findings when you’re ready."}</p></div>
+        <div className="upload-price"><strong>{priceKes === 0 ? "Free" : `KES ${priceKes}`}</strong><span>{priceKes === 0 ? "report + PDF included" : "to unlock · PDF included"}</span></div>
       </div>
       <ol className="upload-stepper flex items-center gap-3 border-b font-medium" aria-label="Check progress">
         {["Consent", "Upload", "Scan", priceKes === 0 ? "Report" : "Reveal"].map((label, i) => <li key={label} aria-current={i === (!consent ? 0 : startedAt === null ? 1 : 2) ? "step" : undefined} className="flex flex-1 items-center gap-2"><span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${i === (!consent ? 0 : startedAt === null ? 1 : 2) ? "bg-blue-700 text-white" : "bg-slate-200 text-slate-500 dark:bg-slate-800"}`}>{i + 1}</span><span>{label}</span></li>)}
@@ -276,7 +276,7 @@ export function UploadForm({ priceKes }: Props) {
             </button>
             <p className="upload-privacy">
               <Icon name="lock" className="h-3 w-3" />
-              {priceKes === 0 ? "No payment needed during testing. Findings and PDF are included." : `Scan first. Pay KES ${priceKes} to reveal findings and download the PDF.`}
+              {priceKes === 0 ? "No payment needed. Findings and PDF are included." : `Scan first. Pay KES ${priceKes} to reveal findings and download the PDF.`}
             </p>
           </form>
       )}

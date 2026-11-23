@@ -62,7 +62,7 @@ export function VisaUpload({ priceKes }: { priceKes: number }) {
     if (isOffer) setOffer(value); else setFile(value);
   }
   return <div className="upload-card">
-    <div className="upload-heading"><div><h2>Check the details before you travel.</h2><p>Qatar and Kuwait · visa or entry/work permit</p></div><div className="upload-price"><strong>{priceKes ? `KES ${priceKes}` : "Free testing"}</strong><span>report + PDF</span></div></div>
+    <div className="upload-heading"><div><h2>Check the details before you travel.</h2><p>Qatar and Kuwait · visa or entry/work permit</p></div><div className="upload-price"><strong>{priceKes ? `KES ${priceKes}` : "Free"}</strong><span>report + PDF</span></div></div>
     {!consent ? <ConsentNotice mode="visa" onAccept={memory => setConsent({ memory })} /> : <form onSubmit={submit} className="space-y-5 p-5 sm:p-7">
       <ol className="muted flex flex-wrap gap-4 text-xs" aria-label="Visa check progress"><li>1. Documents</li><li aria-current={preview ? "step" : undefined}>2. Review details</li><li>3. Check and reveal</li></ol>
       <p className="muted text-xs">Visa documents and passport details are excluded from shared scam patterns. <button type="button" className="underline" disabled={Boolean(busy)} onClick={() => { reset(); setFile(null); setOffer(null); setConsent(null); }}>Review consent</button></p>
@@ -83,7 +83,7 @@ export function VisaUpload({ priceKes }: { priceKes: number }) {
         <button type="submit" disabled={!file} className="btn-primary w-full">Read documents for review</button>
       </>}
       {error && <p role="alert" className="alert-error">{error}</p>}
-      <p className="muted text-xs">{priceKes ? `Payment is requested only after the checked report is saved. KES ${priceKes} unlocks findings and the PDF.` : "Free local testing is enabled."} Official government status remains unverified; opening an official link does not change it.</p>
+      <p className="muted text-xs">{priceKes ? `Payment is requested only after the checked report is saved. KES ${priceKes} unlocks findings and the PDF.` : "Checks are free for now."} Official government status remains unverified; opening an official link does not change it.</p>
     </form>}
   </div>;
 }
